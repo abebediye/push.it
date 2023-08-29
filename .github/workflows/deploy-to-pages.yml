@@ -1,0 +1,19 @@
+name: Deploy changes to Github Pages
+run-name: Test, Build and Deploy
+on:
+    pull_request:
+        branches: develop
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - run: |
+                  yarn run test
+
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: lts
