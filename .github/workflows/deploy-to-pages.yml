@@ -1,9 +1,10 @@
-name: Deploy changes to Github Pages
-run-name: Test, Build and Deploy
+name: Continuous integration
+
 on:
     push:
         branches:
-            - feature/github-actions
+            - feature/*
+
 jobs:
     test:
         runs-on: ubuntu-latest
@@ -15,5 +16,4 @@ jobs:
               run: yarn
 
             - name: Run test with jest
-              run: |
-                  yarn run test
+              run: yarn run test
