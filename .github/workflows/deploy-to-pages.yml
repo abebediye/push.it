@@ -11,6 +11,9 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v3
 
+            - name: Install node modules
+              run: yarn
+
             - name: Run test with jest
               run: |
                   yarn run test
