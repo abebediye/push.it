@@ -1,8 +1,9 @@
 name: Deploy changes to Github Pages
 run-name: Test, Build and Deploy
 on:
-    pull_request:
-        branches: develop
+    push:
+        branches:
+            - feature/github-actions
 jobs:
     test:
         runs-on: ubuntu-latest
