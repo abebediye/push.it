@@ -7,13 +7,9 @@ jobs:
     test:
         runs-on: ubuntu-latest
         steps:
-            - run: |
-                  yarn run test
+            - name: Checkout repository
+              uses: actions/checkout@v3
 
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
-              with:
-                  node-version: lts
+            - name: Run test with jest
+              run: |
+                  yarn run test
