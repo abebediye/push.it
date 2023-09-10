@@ -1,25 +1,26 @@
 'use client'
-import React from 'react'
-import { HiMenu } from 'react-icons/hi'
+import { useState } from 'react'
+import { HiMenu, HiX } from 'react-icons/hi'
 import { SiPerforce } from 'react-icons/si'
 
 const AppBar = () => {
-    const [showMenu, setShowMenu] = React.useState<boolean>(false)
-
-
-    const handleMenduToggle = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-        console.log("button clicked before", showMenu)
-        setShowMenu(prev => !prev)
-        console.log("button clicked after", showMenu)
+    const [showMenu, setShowMenu] = useState<boolean>(false)
+    const handleSetShowMenuToggled = () => {
+        setShowMenu(prevState => !prevState)
     }
 
     return (
-        <nav data-testid={'appbar'}>
-            <SiPerforce data-testid={'logo'} size={32} />
-            <button data-testid={'showMenuToggleButton'} onClick={handleMenduToggle}>
-                <HiMenu size={32} />
-            </button>
-        </nav>
+        <main className='relative text-amber-500 bg-emerald-900'>
+            <nav data-testid={'appbar'} className={'flex justify-between items-center px-5 py-3 '}>
+                <SiPerforce data-testid={'logo'} size={32} />
+                <button data-testid={'showMenuToggleButton'} onClick={handleSetShowMenuToggled}>
+                    {showMenu ? <HiX size={32} /> : <HiMenu size={32} />}
+                </button>
+            </nav>
+
+            <menu className={'absolute right-0 z-10 bg-sky-700 w-full transition-[width] ease-in h-[calc(100vh-56px)] ' + `${showMenu ? 'w-[100vw]' : 'w-0'}`}>
+            </menu>
+        </main>
     )
 }
 export default AppBar
