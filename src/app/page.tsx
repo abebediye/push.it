@@ -1,7 +1,7 @@
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center  p-10">
+    <main className="min-h-[calc(100vh-56px)] bg-slate-900 p-5">
       Home page
     </main>
   )
