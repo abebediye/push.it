@@ -1,11 +1,18 @@
 'use client'
 import SideMenu from '@components/Appbar/SideMenu'
-import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { HiMenu, HiX } from 'react-icons/hi'
 import { SiPerforce } from 'react-icons/si'
 
 const AppBar = () => {
     const [showSideMenu, setShowSideMenu] = useState<boolean>(false)
+    const pathname = usePathname()
+
+    useEffect(() => {
+        setShowSideMenu(false)
+    }, [pathname])
+
     const handleSetShowSideMenuToggled = () => {
         setShowSideMenu(!showSideMenu)
     }
