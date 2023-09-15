@@ -21,7 +21,9 @@
         "paths": {
             "@components/*": ["./src/components/*"],
             "@constants/*": ["./src/constants/*"],
-            "@context/*": ["./src/context/*"]
+            "@context/*": ["./src/providers/*"],
+            "@repository": ["./src/repository"],
+            "@providers": ["./src/providers"]
         }
     },
     "include": [
