@@ -1,33 +1,51 @@
 'use client'
-import SideMenu from '@components/Appbar/SideMenu'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { HiMenu, HiX } from 'react-icons/hi'
-import { SiPerforce } from 'react-icons/si'
+import routes from '@constants/routes'
+import { Link, Listbox, ListboxItem, ListboxSection, Navbar, NavbarContent, NavbarMenu, NavbarMenuToggle, User } from '@nextui-org/react'
+import { useSession } from 'next-auth/react'
+
 
 const AppBar = () => {
-    const [showSideMenu, setShowSideMenu] = useState<boolean>(false)
-    const pathname = usePathname()
-
-    useEffect(() => {
-        setShowSideMenu(false)
-    }, [pathname])
-
-    const handleSetShowSideMenuToggled = () => {
-        setShowSideMenu(!showSideMenu)
-    }
+    const { data: session } = useSession()
 
     return (
-        <main className='relative text-amber-500 bg-emerald-900'>
-            <nav data-testid={'appbar'} className={'flex justify-between items-center px-5 py-3 '}>
-                <SiPerforce data-testid={'logo'} size={32} />
-                <button data-testid={'showMenuToggleButton'} onClick={handleSetShowSideMenuToggled}>
-                    {showSideMenu ? <HiX size={32} /> : <HiMenu size={32} />}
-                </button>
-            </nav>
-
-            <SideMenu showSideMenu={showSideMenu} />
-        </main>
+        <Navbar isBlurred={false}>
+            <NavbarContent className='sm:hidden' justify='start'>
+            </NavbarContent>
+            <NavbarContent className='sm:hidden' justify='end'>
+                <NavbarMenuToggle />
+            </NavbarContent>
+            <NavbarMenu>
+                <Listbox>
+                    <ListboxItem key="user">
+                        <User
+                            name={session?.user?.name}
+                            description="@admin"
+                            avatarProps={{ src: session?.user?.image ?? undefined }}
+                        />
+                    </ListboxItem>
+                    <ListboxSection title='navigation' showDivider>
+                        {routes.map(route => <ListboxItem key={route.title}>
+                            <Link color='foreground' href={route.endpoint}>
+                                {route.title}
+                            </Link>
+                        </ListboxItem>)}
+                    </ListboxSection>
+                    <ListboxSection title={'edit'} showDivider>
+                        <ListboxItem key={'edit-profile'}>
+                            <Link href='/profile' color='foreground'>Profile</Link>
+                        </ListboxItem>
+                        <ListboxItem key={'edit-settings'}>
+                            <Link href='/settings' color='foreground'>Settings</Link>
+                        </ListboxItem>
+                    </ListboxSection>
+                    <ListboxSection>
+                        <ListboxItem key={'signout'} className="text-danger" color="danger" >
+                            <Link color="danger" href='/'>Signout</Link>
+                        </ListboxItem>
+                    </ListboxSection>
+                </Listbox>
+            </NavbarMenu>
+        </Navbar>
     )
 }
 export default AppBar
