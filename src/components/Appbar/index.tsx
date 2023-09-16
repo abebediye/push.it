@@ -9,8 +9,6 @@ const AppBar = () => {
 
     return (
         <Navbar isBlurred={false}>
-            <NavbarContent className='sm:hidden' justify='start'>
-            </NavbarContent>
             <NavbarContent className='sm:hidden' justify='end'>
                 <NavbarMenuToggle />
             </NavbarContent>

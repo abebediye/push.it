@@ -1,29 +1,17 @@
 'use client'
 
-import Spinner from '@components/Spinner'
-import { ButtonHTMLAttributes, ReactNode, useEffect, useState } from 'react'
+import { Button } from '@nextui-org/button'
+import { Spinner } from '@nextui-org/spinner'
+import { ReactNode, useState } from 'react'
 
 type ButtonProps = {
     children: ReactNode
     action: Function
-    type?: 'primary' | 'secondary' | 'confirm' | 'reject'
-} & ButtonHTMLAttributes<HTMLButtonElement>
+    color: "primary" | "danger" | "default" | "secondary" | "success" | "warning" | undefined
+}
 
-const baseStyle: Array<string> = [
-    'flex gap-2.5 items-center justify-center',
-    'w-36 h-10',
-    'bg-red-500 color-white',
-    'px-5 py-2.5',
-    'rounded'
-]
-
-
-const Button = ({ children, action, type, ...defaultButtonProps }: ButtonProps) => {
+const ActionButton = ({ children, action, color }: ButtonProps) => {
     const [loading, setLoading] = useState(false)
-
-    useEffect(() => {
-
-    }, [])
 
     async function handleAction() {
         setLoading(true)
@@ -31,14 +19,20 @@ const Button = ({ children, action, type, ...defaultButtonProps }: ButtonProps) 
     }
 
     return (
-        <button onClick={handleAction} disabled={loading}
-            className={baseStyle.join(' ')} {...defaultButtonProps}>
-            {loading ? <Spinner /> : children}
-        </button>
+        <Button
+            onPress={handleAction}
+            disabled={loading}
+            variant={loading ? "bordered" : "ghost"}
+            color={color}
+        >
+            {loading
+                ? <Spinner color='secondary' size='sm' />
+                : children}
+        </Button>
     )
 }
 
-export default Button
+export default ActionButton
 
 
 {/* <span class="" role="status" aria-label="loading">

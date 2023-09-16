@@ -1,4 +1,5 @@
-import Button from "@components/Button";
+
+import ActionButton from "@components/Button";
 import { setTimeout } from "timers/promises";
 
 async function handleButtonAction() {
@@ -10,9 +11,9 @@ async function handleButtonAction() {
 
 export default function Home() {
   return (
-    <main className="min-h-[calc(100vh-56px)] bg-slate-900 p-5 ">
+    <>
       <h2>Home page</h2>
-      <Button action={handleButtonAction}>Click me</Button>
-    </main>
+      <ActionButton action={handleButtonAction} color="primary">Click me</ActionButton>
+    </>
   )
 }
