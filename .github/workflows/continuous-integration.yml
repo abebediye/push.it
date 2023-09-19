@@ -26,8 +26,6 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v3
 
-            - name: Install node modules
-              run: yarn
-
-            - name: Build
-              run: yarn build
+            - run: yarn
+            - run: yarn prisma generate
+            - run: yarn build
