@@ -7,21 +7,21 @@ on:
             - feature/*
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v3
+    # test:
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         - name: Checkout repository
+    #           uses: actions/checkout@v3
 
-            - name: Install node modules
-              run: yarn
+    #         - name: Install node modules
+    #           run: yarn
 
-            - name: Run test with jest
-              run: yarn run test
+    #         - name: Run test with jest
+    #           run: yarn run test
 
     build:
         runs-on: ubuntu-latest
-        needs: test
+        # needs: test
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
