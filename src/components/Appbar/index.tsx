@@ -38,7 +38,7 @@ const AppBar = () => {
                     </ListboxSection>
                     <ListboxSection>
                         <ListboxItem key={'signout'} className="text-danger" color="danger" >
-                            <Link color="danger" href='/'>Signout</Link>
+                            <Link color="danger" href='/api/auth/signout'>Signout</Link>
                         </ListboxItem>
                     </ListboxSection>
                 </Listbox>

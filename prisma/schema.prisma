@@ -31,8 +31,10 @@ model Account {
 model User {
   id            String    @id @default(cuid())
   name          String?
+  first_name    String?
+  last_name     String?
   email         String?   @unique
-  emailVerified DateTime?
+  emailVerified Boolean   @default(false)
   image         String?
   accounts      Account[]
 }
